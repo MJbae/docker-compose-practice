@@ -15,4 +15,4 @@ services:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
     volumes:
-      - /Users/maxwell/PycharmProjects/docker-compose-practice/data:/var/lib/mysql
+      - ./data:/var/lib/mysql
