@@ -355,3 +355,4 @@ fabric.properties
 /.idea/misc.xml
 /.idea/inspectionProfiles/profiles_settings.xml
 django_postgre_compose/data
+django_mysql_celery_compose/data
