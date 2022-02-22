@@ -5,7 +5,7 @@ services:
     image: mysql:5.7
     container_name: db
     ports:
-      - "3306:3306"
+      - "3309:3306"
     environment:
       MYSQL_DATABASE: mysqldb
       MYSQL_USER: tester
