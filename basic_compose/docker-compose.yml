@@ -8,5 +8,7 @@ services:
       - type: bind
         source: .
         target: /code
+    environment:
+      FLASK_ENV: development
   redis:
     image: "redis:alpine"
