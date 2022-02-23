@@ -30,3 +30,23 @@ services:
      - MYSQL_ROOT_PASSWORD=rootpass
     depends_on:
       - db
+  redis:
+    image: redis:alpine
+    container_name: redis-server
+  celery:
+    restart: always
+    container_name: celery-worker
+    build:
+      context: .
+    command: celery -A composeexample worker -l info
+    volumes:
+      - .:/code
+    environment:
+     - MYSQL_DATABASE=mysqldb
+     - MYSQL_USER=tester
+     - MYSQL_PASSWORD=testerpass
+     - MYSQL_ROOT_PASSWORD=rootpass
+    depends_on:
+      - db
+      - redis
+      - web
