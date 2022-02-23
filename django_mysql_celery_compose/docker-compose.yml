@@ -1,30 +1,32 @@
-version: "3.1"
+version: "3.9"
+
 services:
   db:
     platform: linux/x86_64
     image: mysql:5.7
-    container_name: db
+    container_name: mysql
+    volumes:
+      - ./data/db:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: mysqldb
-      MYSQL_USER: tester
-      MYSQL_PASSWORD: testerpass
-      MYSQL_ROOT_PASSWORD: rootpass
+     - MYSQL_DATABASE=mysqldb
+     - MYSQL_USER=tester
+     - MYSQL_PASSWORD=testerpass
+     - MYSQL_ROOT_PASSWORD=rootpass
     command:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
-    volumes:
-      - ./data/db:/var/lib/mysql
   web:
     build: .
+    container_name: django
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
     ports:
       - "8000:8000"
     environment:
-      MYSQL_DATABASE: mysqldb
-      MYSQL_USER: tester
-      MYSQL_PASSWORD: testerpass
-      MYSQL_ROOT_PASSWORD: rootpass
+     - MYSQL_DATABASE=mysqldb
+     - MYSQL_USER=tester
+     - MYSQL_PASSWORD=testerpass
+     - MYSQL_ROOT_PASSWORD=rootpass
     depends_on:
       - db
