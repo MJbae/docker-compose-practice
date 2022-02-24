@@ -7,11 +7,8 @@ services:
     container_name: mysql
     volumes:
       - ./data/db:/var/lib/mysql
-    environment:
-     - MYSQL_DATABASE=mysqldb
-     - MYSQL_USER=tester
-     - MYSQL_PASSWORD=testerpass
-     - MYSQL_ROOT_PASSWORD=rootpass
+    env_file:
+      - ./.env
     command:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
@@ -23,11 +20,8 @@ services:
       - .:/code
     ports:
       - "8000:8000"
-    environment:
-     - MYSQL_DATABASE=mysqldb
-     - MYSQL_USER=tester
-     - MYSQL_PASSWORD=testerpass
-     - MYSQL_ROOT_PASSWORD=rootpass
+    env_file:
+      - ./.env
     depends_on:
       - db
   redis:
@@ -41,11 +35,8 @@ services:
     command: celery -A composeexample worker -l info
     volumes:
       - .:/code
-    environment:
-     - MYSQL_DATABASE=mysqldb
-     - MYSQL_USER=tester
-     - MYSQL_PASSWORD=testerpass
-     - MYSQL_ROOT_PASSWORD=rootpass
+    env_file:
+      - ./.env
     depends_on:
       - db
       - redis
