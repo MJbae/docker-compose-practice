@@ -35,8 +35,6 @@ services:
     command: celery -A composeexample worker -l info
     volumes:
       - .:/code
-    env_file:
-      - ./.env
     depends_on:
       - db
       - redis
@@ -49,10 +47,6 @@ services:
     command: celery -A composeexample beat -l info
     volumes:
       - .:/code
-    env_file:
-      - ./.env
     depends_on:
-      - db
       - redis
-      - web
       - celery
